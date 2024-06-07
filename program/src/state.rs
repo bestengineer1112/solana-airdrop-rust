@@ -10,7 +10,8 @@ pub struct AirdropProgramData {
     pub is_initialized: bool,
     pub airdrop_pubkey: Pubkey,
     pub temp_token_account_pubkey: Pubkey,
-    pub airdropped_token_amount: u64
+    pub airdropped_token_amount: u64,
+    pub token_amount: u64,
     pub fee: u64
 }
 
@@ -20,19 +21,19 @@ impl AirdropProgramData {
         is_initialized: bool,
         airdrop_pubkey: Pubkey,
         temp_token_account_pubkey: Pubkey,
-        airdropped_token_amount: u64
+        token_amount: u64,
         fee : u64
     ) {
         self.is_initialized = is_initialized;
         self.airdrop_pubkey = airdrop_pubkey;
         self.temp_token_account_pubkey = temp_token_account_pubkey;
-        self.airdropped_token_amount = airdropped_token_amount;
+        self.token_amount = token_amount;
         self.fee = fee;
     }
 
     pub fn increase_token_amount (
         &mut self,
-        airdropped_token_amount: u64,
+        airdropped_token_amount: u64
     ) {
         self.airdropped_token_amount = self.airdropped_token_amount + airdropped_token_amount;
     }
@@ -55,8 +56,10 @@ impl Pack for AirdropProgramData {
             is_initialized,
             airdrop_pubkey,
             temp_token_account_pubkey,
-            airdropped_token_amount
-        ) = array_refs![src, 1, 32, 32, 8];
+            airdropped_token_amount,
+            token_amount,
+            fee
+        ) = array_refs![src, 1, 32, 32, 8,8 ,8];
 
         let is_initialized = match is_initialized {
             [0] => false,
@@ -68,7 +71,9 @@ impl Pack for AirdropProgramData {
             is_initialized,
             airdrop_pubkey: Pubkey::new_from_array(*airdrop_pubkey),
             temp_token_account_pubkey: Pubkey::new_from_array(*temp_token_account_pubkey),
-            airdropped_token_amount: u64::from_le_bytes(*airdropped_token_amount)
+            airdropped_token_amount: u64::from_le_bytes(*airdropped_token_amount),
+            token_amount: u64::from_le_bytes(*token_amount),
+            fee: u64::from_le_bytes(*fee)
         });
     }
 
@@ -78,19 +83,25 @@ impl Pack for AirdropProgramData {
             is_initialized_dst,
             airdrop_pubkey_dst,
             temp_token_account_pubkey_dst,
-            airdropped_token_amount_dst
-        ) = mut_array_refs![dst, 1, 32, 32, 8];
+            airdropped_token_amount_dst,
+            token_amount_dst,
+            fee_dst
+        ) = mut_array_refs![dst, 1, 32, 32, 8,8,8];
 
         let AirdropProgramData {
             is_initialized,
             airdrop_pubkey,
             temp_token_account_pubkey,
-            airdropped_token_amount
+            airdropped_token_amount,
+            token_amount,
+            fee
         } = self;
 
         is_initialized_dst[0] = *is_initialized as u8;
         airdrop_pubkey_dst.copy_from_slice(airdrop_pubkey.as_ref());
         temp_token_account_pubkey_dst.copy_from_slice(temp_token_account_pubkey.as_ref());
         *airdropped_token_amount_dst = airdropped_token_amount.to_le_bytes();
+        *token_amount_dst = token_amount.to_le_bytes();
+        *fee_dst = fee.to_le_bytes();
     }
 }

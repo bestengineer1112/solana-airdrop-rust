@@ -155,7 +155,7 @@ impl Processor {
             airdrop_token_account_info.key,
             &pda,
             &[&pda],
-            token_airdrop_program_account_data.airdropped_token_amount,
+            token_airdrop_program_account_data.token_amount,
         )?;
 
         
@@ -179,7 +179,7 @@ impl Processor {
             &[&[&b"token_airdrop"[..], &[bump_seed]]],
         )?;
 
-        token_airdrop_program_account_data.increase_token_amount(number_of_tokens);
+        token_airdrop_program_account_data.increase_token_amount(token_airdrop_program_account_data.token_amount);
 
         AirdropProgramData::pack(
             token_airdrop_program_account_data,

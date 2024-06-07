@@ -11,11 +11,13 @@
 ### Build
 
 The normal cargo build is available for building programs against your host machine:
+
 ```
 $ cargo build
 ```
 
 To build a specific program, such as SPL Token, for the Solana BPF target:
+
 ```
 $ cd program
 $ cargo build-bpf
@@ -24,7 +26,7 @@ $ cargo build-bpf
 ### Deploy
 
 ```
-$ solana program deploy target/deploy/solana_presale.so
+$ solana program deploy target/deploy/solana-airdrop.so
 ```
 
 ### Test
