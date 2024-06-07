@@ -9,7 +9,6 @@ pub enum AirdropInstruction {
         fee: u64,
     },
     AirdropToken {
-        number_of_tokens: u64,
     },
 }
 
@@ -26,7 +25,6 @@ impl AirdropInstruction {
                 fee: Self::unpack_byte(rest, 1)?,
             }),
             1 => Ok(Self::AirdropToken {
-                number_of_tokens: Self::unpack_byte(rest, 0)?,
             }),
             _ => Err(InvalidInstruction.into())
         };
