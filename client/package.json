@@ -1,0 +1,32 @@
+{
+  "name": "solana-presale",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc -p ./tsconfig.json",
+    "setup": "npm run compile && node build/setup.js",
+    "start": "npm run compile && node build/startTokenSale.js",
+    "buy": "npm run compile && node build/buyToken.js",
+    "airdrop": "npm run compile && node build/airdrop.js",
+    "close": "npm run compile && node build/closeTokenSale.js"
+  },
+  "author": "",
+  "devDependencies": {
+    "@types/bn.js": "^5.1.5",
+    "@types/bs58": "^4.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.2",
+    "@typescript-eslint/parser": "^4.31.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-unused-imports": "^1.1.5",
+    "prettier": "^2.4.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "@solana/spl-token": "^0.1.8",
+    "@solana/web3.js": "^1.29.1",
+    "bn.js": "^5.2.0"
+  }
+}
