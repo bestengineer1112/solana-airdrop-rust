@@ -49,7 +49,7 @@ impl IsInitialized for AirdropProgramData {
 }
 
 impl Pack for AirdropProgramData {
-    const LEN: usize = 113;
+    const LEN: usize = 89;
     fn unpack_from_slice(src: &[u8]) -> Result<Self, ProgramError> {
         let src = array_ref![src, 0, AirdropProgramData::LEN];
         let (

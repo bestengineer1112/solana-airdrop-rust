@@ -36,9 +36,9 @@ impl Processor {
                 )
             }
 
-            AirdropInstruction::AirdropToken { number_of_tokens } => {
+            AirdropInstruction::AirdropToken {  } => {
                 msg!("Instruction: airdrop token");
-                Self::airdrop_token(accounts, token_program_id, number_of_tokens)
+                Self::airdrop_token(accounts, token_program_id)
             }
         }
     }
