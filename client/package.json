@@ -6,10 +6,8 @@
   "scripts": {
     "compile": "tsc -p ./tsconfig.json",
     "setup": "npm run compile && node build/setup.js",
-    "start": "npm run compile && node build/startTokenSale.js",
-    "buy": "npm run compile && node build/buyToken.js",
-    "airdrop": "npm run compile && node build/airdrop.js",
-    "close": "npm run compile && node build/closeTokenSale.js"
+    "start": "npm run compile && node build/startTokenAirdrop.js",
+    "airdrop": "npm run compile && node build/airdrop.js"
   },
   "author": "",
   "devDependencies": {
